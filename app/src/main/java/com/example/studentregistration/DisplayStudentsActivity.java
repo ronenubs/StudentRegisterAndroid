@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -35,7 +36,7 @@ public class DisplayStudentsActivity extends AppCompatActivity {
 
     RequestQueue requestQueue;
     StringRequest stringRequest;
-
+    ArrayAdapter adapter;
     ArrayList<Student> studentsList;
 
     @Override
@@ -83,6 +84,7 @@ public class DisplayStudentsActivity extends AppCompatActivity {
 
     }
 
+
     private void deleteStudent(final int i) {
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         stringRequest = new StringRequest(
@@ -95,6 +97,9 @@ public class DisplayStudentsActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(),
                                     "Student with id#" + i + " is successfully removed.",
                                     Toast.LENGTH_LONG).show();
+                            adapter.notifyDataSetChanged();
+                            studentsList.clear();
+                            loadStudents();
                         }
                     }
                 },
@@ -112,9 +117,7 @@ public class DisplayStudentsActivity extends AppCompatActivity {
                 return map;
             }
         };
-
         requestQueue.add(stringRequest);
-        loadStudents();
     }
 
     private void loadStudents() {
@@ -145,10 +148,11 @@ public class DisplayStudentsActivity extends AppCompatActivity {
                                 );
                             }
 
-                            ListAdapter adapter = new StudentAdapter(
+                            adapter = new StudentAdapter(
                                     getApplicationContext(),
                                     studentsList
                             );
+
 
                             lvDisplayStudents.setAdapter(adapter);
 

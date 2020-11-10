@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         etFirstname = findViewById(R.id.etFirstname);
         etMiddlename = findViewById(R.id.etMiddlename);
         etLastname = findViewById(R.id.etLastname);
-        etAge = findViewById(R.id.etAddress);
+        etAge = findViewById(R.id.etAge);
         etAddress = findViewById(R.id.etAddress);
         btnInsertStudent = findViewById(R.id.btnInsertStudent);
         btnDisplayStudents = findViewById(R.id.btnDisplayStudents);
